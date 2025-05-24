@@ -52,11 +52,10 @@ const ProductList = () => {
     return (
         <Container className="py-4 ms-2" style={{ height: "100%" }}>
             <h1 className="mb-4 text-center">Product Catalog</h1>
-
-            {/* Search and Category Filter */}
             <Row
                 className="mb-4 px-3"
                 style={{
+                    marginLeft:"1px",
                     display: 'flex',
                     flexDirection: window.innerWidth < 780 ? 'column' : 'row',
                     gap: '1rem',
