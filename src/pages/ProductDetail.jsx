@@ -16,11 +16,11 @@ const ProductDetail = () => {
         getProductById(id)
             .then(data => {
                 setProduct(data);
-               
+                setLoading(false);
             })
             .catch(() => {
                 setError('Failed to fetch product details.');
-               
+                setLoading(false);
             });
     }, [id]);
 

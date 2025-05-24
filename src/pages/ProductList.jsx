@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getAllProducts } from '../services/productService';
 import ProductCard from '../components/ProductCard';
+import Loader from '../components/Loader';
 import Error from '../components/Error';
 import { Container, Row, Col, Form, InputGroup } from 'react-bootstrap';
 
@@ -19,9 +20,11 @@ const ProductList = () => {
                 setFilteredProducts(data);
                 const allCategories = ['All', ...new Set(data.map(p => p.category))];
                 setCategories(allCategories);
+                setLoading(false);
             })
             .catch(err => {
                 setError('Failed to fetch products.');
+                setLoading(false);
             });
     }, []);
 
@@ -41,16 +44,17 @@ const ProductList = () => {
         setFilteredProducts(filtered);
     }, [searchTerm, selectedCategory, products]);
 
+    if (loading) return <Loader />;
     if (error) return <Error message={error} />;
 
     return (
         <Container className="py-4 ms-2" style={{ height: "100%" }}>
             <h1 className="mb-4 text-center">Product Catalog</h1>
-            
+
+            {/* Search and Category Filter */}
             <Row
                 className="mb-4 px-3"
                 style={{
-                    marginLeft:"1px",
                     display: 'flex',
                     flexDirection: window.innerWidth < 780 ? 'column' : 'row',
                     gap: '1rem',
