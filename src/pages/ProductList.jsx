@@ -8,6 +8,7 @@ import { Container, Row, Col, Form, InputGroup } from 'react-bootstrap';
 const ProductList = () => {
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('All');
@@ -18,6 +19,7 @@ const ProductList = () => {
             .then(data => {
                 setProducts(data);
                 setFilteredProducts(data);
+                // Extract unique categories
                 const allCategories = ['All', ...new Set(data.map(p => p.category))];
                 setCategories(allCategories);
                 setLoading(false);
